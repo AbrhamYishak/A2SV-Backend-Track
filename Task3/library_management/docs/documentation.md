@@ -99,46 +99,64 @@ Returns a list of books that are **currently borrowed**.
 
 ---
 ##  **Usage Example**
-Welcome to the library
-1, Add Member
-2, Remove Member
-3, Add Book
-4, Remove Book
-5, Borrow Book
-6, Return Book
-7, List Available Books
-8, List Borrowed Books
-9, Exit
-enter your choice: 1
-enter id of the member:
-101
-enter name of the member:
-Abrham
-successfully added the member
+- Welcome to the library
+- 1, Add Member
+- 2, Remove Member
+- 3, Add Book
+- 4, Remove Book
+- 5, Borrow Book
+- 6, Return Book
+- 7, List Available Books
+- 8, List Borrowed Books
+- 9, Exit
+- enter your choice: 1
+- enter id of the member:
+- 101
+- enter name of the member:
+- Abrham
+- successfully added the member
 
-1, Add Member
-2, Remove Member
-...
-enter your choice: 3
-enter id of the book:
-201
-enter title of the book:
-Go Programming
-enter name of the author:
-Alan A. A. Donovan
-successfully added the book
+- 1, Add Member
+- 2, Remove Member
+- 3, Add Book
+- 4, Remove Book
+- 5, Borrow Book
+- 6, Return Book
+- 7, List Available Books
+- 8, List Borrowed Books
+- 9, Exit
+- enter your choice: 3
+- enter id of the book:
+- 201
+- enter title of the book:
+- Go Programming
+- enter name of the author:
+- Alan A. A. Donovan
+- successfully added the book
 
-1, Add Member
-2, Remove Member
-...
-enter your choice: 5
-enter id of the book:
-201
-enter id of the member:
-101
-successfully borrowed the book
+- 1, Add Member
+- 2, Remove Member
+- 3, Add Book
+- 4, Remove Book
+- 5, Borrow Book
+- 6, Return Book
+- 7, List Available Books
+- 8, List Borrowed Books
+- 9, Exit
+- enter your choice: 5
+- enter id of the book:
+- 201
+- enter id of the member:
+- 101
+- successfully borrowed the book
 
-1, Add Member
-2, Remove Member
-...
-enter your choice: 9
+- 1, Add Member
+- 2, Remove Member
+- 3, Add Book
+- 4, Remove Book
+- 5, Borrow Book
+- 6, Return Book
+- 7, List Available Books
+- 8, List Borrowed Books
+- 9, Exit
+- enter your choice: 9
