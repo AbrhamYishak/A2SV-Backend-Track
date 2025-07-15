@@ -3,7 +3,6 @@ package services
 import (
 	"task3/models"
 	"errors"
-	"fmt"
 )
 
 type Library struct{
@@ -89,7 +88,13 @@ func (l *Library) ReturnBook(bookID int, membersID int)error {
 			return errors.New("no member with this id")
 		}
         b.Status = "not borrowed"
-        m.BorrowedBooks = append(m.BorrowedBooks, b) 
+		var p int
+		for i := range m.BorrowedBooks{
+			if i == bookID{
+                p = i
+			}
+		}
+		m.BorrowedBooks = append(m.BorrowedBooks[:p],m.BorrowedBooks[p+1:]...)
         l.Members[membersID] = m 
 		l.Book[bookID] = b
 		return nil

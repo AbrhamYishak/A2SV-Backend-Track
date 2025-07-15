@@ -32,26 +32,32 @@ func LibraryController(){
 	   fmt.Println("enter id of the member: ")
        if _,err := fmt.Scan(&id); err!=nil{
 	   fmt.Println("not valid input enter only integer")
+	   break
        }
 	   fmt.Println("enter name of the member: ")
        if _,err := fmt.Scan(&name); err!=nil{
 	   fmt.Println("not valid input enter only integer")
+	   break
        }
 	   if err:=(l.Addmember(id,name)); err!=nil{
 		   fmt.Println(err)
-	   }
-	   fmt.Println("successfully added the member")
+	   }else{
+		   fmt.Println("successfully added the member")
+	   }	 
+
    }
    case 2: {
 	   var id int
 	   fmt.Println("enter id of the member: ")
        if _,err := fmt.Scan(&id); err!=nil{
 	   fmt.Println("not valid input enter only integer")
+	   break
        }
 	   if err:=(l.Delmember(id)); err!=nil{
 		   fmt.Println(err)
+	   }else{
+		   fmt.Println("successfully Deleted the member")
 	   }
-	   fmt.Println("successfully Deleted the member")
    }
    case 3: {
 	   var author string
@@ -61,14 +67,17 @@ func LibraryController(){
 	   fmt.Println("enter id of the book: ")
        if _,err := fmt.Scan(&id); err!=nil{
 	   fmt.Println("not valid input enter only integer")
+	   break
        }
 	   fmt.Println("enter title of the book: ")
        if _,err := fmt.Scan(&title); err!=nil{
 	   fmt.Println("not valid input enter only strings")
+	   break
        }
 	   fmt.Println("enter name of the author: ")
        if _,err := fmt.Scan(&author); err!=nil{
 	   fmt.Println("not valid input enter only strings")
+	   break
 	   }
 	   b := models.Book{
 		   ID: id,
@@ -84,43 +93,51 @@ func LibraryController(){
 	   fmt.Println("enter id of the book: ")
        if _,err := fmt.Scan(&id); err!=nil{
 	   fmt.Println("not valid input enter only integer")
+	   break
        }
 	   if err:=(l.RemoveBook(id)); err!=nil{
 		   fmt.Println(err)
+	   }else{
+		   fmt.Println("successfully Removed the book")
 	   }
-	   fmt.Println("successfully Removed the book")
    }
    case 5:{
 	   var id int
 	   fmt.Println("enter id of the book: ")
        if _,err := fmt.Scan(&id); err!=nil{
 	   fmt.Println("not valid input enter only integer")
+	   break
        }
 	   var idM int
 	   fmt.Println("enter id of the member: ")
        if _,err := fmt.Scan(&idM); err!=nil{
 	   fmt.Println("not valid input enter only integer")
+	   break
        }
 	   if err:=(l.BorrowBook(id,  idM)); err!=nil{
 		   fmt.Println(err)
+	   }else{
+		   fmt.Println("successfully borrowed the book")
 	   }
-	   fmt.Println("successfully borrowed the book")
    }
    case 6:{
 	   var id int
 	   fmt.Println("enter id of the book: ")
        if _,err := fmt.Scan(&id); err!=nil{
 	   fmt.Println("not valid input enter only integer")
+	   break
        }
 	   var idM int
 	   fmt.Println("enter id of the member: ")
        if _,err := fmt.Scan(&idM); err!=nil{
 	   fmt.Println("not valid input enter only integer")
+	   break
        }
 	   if err:=(l.ReturnBook(id,  idM)); err!=nil{
 		   fmt.Println(err)
+	   }else{
+		   fmt.Println("successfully returned the book")
 	   }
-	   fmt.Println("successfully returned the book")
    }
    case 7:{
        fmt.Println(l.ListAvailableBooks())
