@@ -1,3 +1,4 @@
+
 # Task Management API Documentation
 
 **Base URL:** `http://localhost:8080`
@@ -94,7 +95,10 @@ curl --location 'http://localhost:8080/tasks/2'
   "Duedate": "2025-07-18T08:30:00Z"
 }
 ```
-### Create Task
+
+---
+
+###  Create Task
 
 **Endpoint**:  
 `POST /tasks/`
@@ -138,10 +142,11 @@ curl --location 'http://localhost:8080/tasks/' \
 {
   "message": "Successfully created the task"
 }
-
-
 ```
-### Update Task
+
+---
+
+###  Update Task
 
 **Endpoint**:  
 `PUT /tasks/:id`
@@ -161,8 +166,8 @@ Updates an existing task by its ID. This request **replaces** the entire task ob
   "Duedate": "2025-07-18T08:30:00Z",
   "Status": false
 }
+```
 
----
 **Success Responses**:
 - `200 OK`: Successfully updated
 
