@@ -121,8 +121,6 @@ Updates an existing task by its ID. This request **replaces** the entire task ob
 
 **Success Responses**:
 - `200 OK`: Successfully updated
-- `201 Created`: Created a new resource (less common)
-- `204 No Content`: No content returned but updated
 
 **Example cURL**:
 ```bash
@@ -162,8 +160,6 @@ None
 
 **Success Responses**:
 - `200 OK`: Task deleted
-- `202 Accepted`: Request accepted
-- `204 No Content`: Deleted, no content returned
 
 **Example cURL**:
 ```bash
