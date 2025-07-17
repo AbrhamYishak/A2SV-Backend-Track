@@ -94,7 +94,50 @@ curl --location 'http://localhost:8080/tasks/2'
   "Duedate": "2025-07-18T08:30:00Z"
 }
 ```
+### Create Task
 
+**Endpoint**:  
+`POST /tasks/`
+
+**Description**:  
+Creates a new task. This request submits data to the server via the request body in JSON format.
+
+**Request Headers**:
+- `Content-Type: application/json`
+
+**Request Body** (JSON):
+```json
+{
+  "ID": "4",
+  "Title": "complete task 4",
+  "Description": "on the way of completion",
+  "Duedate": "2025-07-18T08:30:00Z",
+  "Status": true
+}
+```
+
+**Success Responses**:
+- `201 Created`: Successfully created the task
+- `200 OK`: Request processed successfully (less common)
+
+**Example cURL**:
+```bash
+curl --location 'http://localhost:8080/tasks/' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "ID":"4",
+  "Title":"complete task 4",
+  "Description": "on the way of completion",
+  "Duedate": "2025-07-18T08:30:00Z",
+  "Status": true
+}'
+```
+
+**Example Response**:
+```json
+{
+  "message": "Successfully created the task"
+}
 ---
 
 ### Update Task
