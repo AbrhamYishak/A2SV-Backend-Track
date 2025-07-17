@@ -138,8 +138,9 @@ curl --location 'http://localhost:8080/tasks/' \
 {
   "message": "Successfully created the task"
 }
----
 
+
+```
 ### Update Task
 
 **Endpoint**:  
@@ -160,8 +161,8 @@ Updates an existing task by its ID. This request **replaces** the entire task ob
   "Duedate": "2025-07-18T08:30:00Z",
   "Status": false
 }
-```
 
+---
 **Success Responses**:
 - `200 OK`: Successfully updated
 
