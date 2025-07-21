@@ -115,7 +115,38 @@ curl --location 'http://localhost:8080/tasks/2'
 ```
 
 ---
+### Create Task
 
+
+**Endpoint**:  
+`POST /tasks/`
+
+**Description**:  
+create and inset to the database based.
+
+**Request Headers**:
+- `Content-Type: application/json`
+
+**Request Body** (JSON):
+```json
+{
+  "Title": "complete task 4",
+  "Description": "on the way of completion",
+  "Duedate": "2025-07-18T08:30:00Z",
+  "Status": false
+}
+```bash
+curl --location --request PUT 'http://localhost:8080/tasks/2' \
+--header 'Content-Type: application/json' \
+--data-raw '{  
+  "title": "complete task 4",
+  "Description": "on the way of completion",
+  "Duedate": "2025-07-18T08:30:00Z",
+  "Status": false
+}'
+```
+**Success Responses**:
+- `201 Created`: Created a new resource (less common)
 ### Update Task
 
 **Endpoint**:  
@@ -136,6 +167,16 @@ Updates an existing task by its ID. This request **replaces** the entire task ob
   "Duedate": "2025-07-18T08:30:00Z",
   "Status": false
 }
+```bash
+curl --location --request PUT 'http://localhost:8080/tasks/2' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "ID":"2",
+  "Title":"complete task 4",
+  "Description":"on the way of completion",
+  "Duedate":"2025-07-18T08:30:00Z",
+  "Status": false
+}'
 ```
 
 **Success Responses**:
