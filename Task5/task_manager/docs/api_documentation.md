@@ -4,20 +4,39 @@
 
 ---
 
-## Endpoints
+## Database
+
+The application uses **MongoDB** as the database to store task data.
+
+- **Database name:** `taskdb`  
+- **Collection name:** `tasks`
+
+Each task document in MongoDB has the following structure:
+
+```json
+{
+  "_id": "ObjectId",           /* Automatically generated unique identifier by MongoDB */
+  "title": "string",           /* Title of the task */
+  "description": "string",     /* Description/details about the task */
+  "completed": true,           /* Status indicating if the task is completed */
+  "duedate": "ISODate"         /* Due date/time of the task */
+}
+
+```
+## endpoints
 
 ---
 
-###  Get All Tasks
+###  get all tasks
 
-**Endpoint**:  
-`GET /tasks`
+**endpoint**:  
+`get /tasks`
 
-**Description**:  
-Retrieves a list of all tasks.
+**description**:  
+retrieves a list of all tasks from the database.
 
-**Request Headers**:
-- `Content-Type: application/json`
+**request headers**:
+- `content-type: application/json`
 
 **Query Parameters**: *(optional)*  
 - `id`: Use `id=1` to get a specific task (alternative to `/tasks/:id`)
@@ -68,7 +87,7 @@ curl --location 'http://localhost:8080/tasks'
 `GET /tasks/:id`
 
 **Description**:  
-Fetches a specific task by its ID.
+Fetches a specific task by its ID from databse.
 
 **Request Headers**:
 - `Content-Type: application/json`
@@ -103,7 +122,7 @@ curl --location 'http://localhost:8080/tasks/2'
 `PUT /tasks/:id`
 
 **Description**:  
-Updates an existing task by its ID. This request **replaces** the entire task object.
+Updates an existing task by its ID. This request **replaces** the entire task object with the new task based on the given id.
 
 **Request Headers**:
 - `Content-Type: application/json`
@@ -152,7 +171,7 @@ curl --location --request PUT 'http://localhost:8080/tasks/2' \
 `DELETE /tasks/:id`
 
 **Description**:  
-Deletes a task by its ID.
+Deletes a task by its ID from the database.
 
 **Request Headers**:
 - `Content-Type: application/json`
