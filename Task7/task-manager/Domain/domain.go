@@ -11,11 +11,8 @@ type Task struct {
 	Duedate     time.Time          
 }
 type User struct {
-	ID          primitive.ObjectID 
+	ID          string
 	Username    string             
     Password    string             
 	Isadmin     bool               
-}
-type TaskRepo interface{
-
 }

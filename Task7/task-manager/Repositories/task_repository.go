@@ -1,21 +1,34 @@
-package db
+package Repositories
+
 import (
-    "go.mongodb.org/mongo-driver/mongo"
-    "go.mongodb.org/mongo-driver/mongo/options"
 	"context"
-	"log"
+	"errors"
 	"fmt"
+	"log"
+	"task7/Domain"
+	"task7/Usecases"
 	"time"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 type TaskRepo struct {
 	Collection *mongo.Collection
 	Context    context.Context
 }
-func NewUserRepo() UseCase.IUserRepo {
-	col := initDB(username)
+type TaskDTO struct {
+	ID          primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty"`
+	Title       string             `json:"title" bson:"title"`
+	Description string             `json:"description" bson:"description"`
+	Completed   bool               `json:"completed" bson:"completed"`
+	Duedate     time.Time          `json:"duedate" bson:"duedate"`
+}
+func NewTaskRepo() Usecases.TaskRepoI {
+	col := initDB()
 	ctx := context.Background()
 
-	return &UserRepo{
+	return &TaskRepo{
 		Collection: col,
 		Context:    ctx,
 	}
@@ -38,4 +51,34 @@ func initDB() *mongo.Collection{
 
 	taskCollection := client.Database("taskdb").Collection("tasks")
     return taskCollection
+}
+func (t *TaskRepo) CreateTasks(task *Domain.Task) error {
+	_, err := t.Collection.InsertOne(t.Context, task)
+	return err
+}
+
+func (tr *TaskRepo) ChangeToTask (t TaskDTO) * Domain.Task{
+    var task Domain.Task  
+	task.ID = t.ID.Hex()
+	task.Description = t.Description
+	task.Title = t.Title
+	task.Completed = t.Completed
+	task.Duedate = t.Duedate
+	return &task
+}
+func (t *TaskRepo) GetTasks() ([]Domain.Task,error){
+    var tasks []Domain.Task 
+
+	data, err := t.Collection.Find(t.Context, bson.M{})
+	if err != nil {
+		return []Domain.Task{}, errors.New("could not find the task")
+	}
+	for data.Next(t.Context) {
+		var task TaskDTO
+		if err := data.Decode(&task); err != nil {
+			return []Domain.Task{}, errors.New("could not find the task")
+		}
+		tasks = append(tasks, *t.ChangeToTask(task))
+	}
+	return tasks, nil
 }
