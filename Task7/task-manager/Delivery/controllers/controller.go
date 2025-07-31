@@ -47,6 +47,38 @@ func (tc *TaskController) GetTasks (c *gin.Context){
 	}
 	c.IndentedJSON(http.StatusOK, tasks)
 }
+func (tc *TaskController) GetByID (c *gin.Context){
+	id := c.Param("id")
+	task, err := tc.TaskUseCase.GetByID(id)
+	if err != nil{	
+		c.IndentedJSON(http.StatusInternalServerError, gin.H{"message":err.Error()})
+		return
+	}
+	c.IndentedJSON(http.StatusOK, task)
+}
+func(tc *TaskController) EditTaskByID(c *gin.Context){	
+	id := c.Param("id")
+    var t TaskDTO
+    if err := c.BindJSON(&t); err != nil{
+	   c.IndentedJSON(http.StatusBadRequest, gin.H{"message":"invalid input"})
+	   return
+    }
+	err := tc.TaskUseCase.EditTask(id, tc.ChangeToTask(t))
+	if err != nil{
+		c.IndentedJSON(http.StatusInternalServerError, gin.H{"message":err.Error()})
+		return
+	}
+	c.IndentedJSON(http.StatusOK, gin.H{"message":"Succesfully edited the task"})	
+}
+func(tc *TaskController) DelTasksByID(c *gin.Context){	
+	id := c.Param("id")
+	err := tc.TaskUseCase.DeleteTask(id)
+	if err != nil{ 	
+	   c.IndentedJSON(http.StatusInternalServerError,gin.H{"message":err.Error()})
+	   return
+	}
+	c.IndentedJSON(http.StatusOK, gin.H{"message":"Successfully deleted the task"})
+}
 func (tc *TaskController) ChangeToTask (t TaskDTO) * Domain.Task{
     var task Domain.Task  
 	task.ID = t.ID.Hex()

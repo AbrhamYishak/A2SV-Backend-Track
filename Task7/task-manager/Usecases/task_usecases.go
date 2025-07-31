@@ -33,3 +33,18 @@ func (tu *TaskUsecase) GetTasks () ([]Domain.Task,error){
 	tasks, err := tu.Repo.GetTasks()
 	return tasks, err
 }
+func (tu *TaskUsecase) GetByID(id string) (Domain.Task, error){
+    task, err := tu.Repo.GetByID(id)
+	return task, err
+}
+func (tu *TaskUsecase) EditTask(id string , t *Domain.Task) error{
+	if err := tu.CheckTask(t);err !=nil{
+		return err
+	}
+	err := tu.Repo.EditTask(id, t)
+	return err
+}
+func (tu *TaskUsecase) DeleteTask(id string) error{
+	err:= tu.Repo.DeleteTask(id)
+	return err
+}

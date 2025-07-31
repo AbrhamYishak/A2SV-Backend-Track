@@ -6,8 +6,11 @@ import (
    "task7/Delivery/routers"
 )
 func main(){
-    repo := Repositories.NewTaskRepo()
-    tuc :=  Usecases.NewtaskUsecase(repo)
+    trepo := Repositories.NewTaskRepo()
+	urepo := Repositories.NewUserRepo()
+    tuc :=  Usecases.NewtaskUsecase(trepo)
+	uuc := Usecases.NewUserUsecase(urepo)
     tc := controllers.NewTaskController(tuc)
-    routers.StartRoute(tc) 
+	uc := controllers.NewUserController(uuc)
+    routers.StartRoute(tc,uc) 
 }
