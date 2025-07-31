@@ -12,5 +12,5 @@ func main(){
 	uuc := Usecases.NewUserUsecase(urepo)
     tc := controllers.NewTaskController(tuc)
 	uc := controllers.NewUserController(uuc)
-    routers.StartRoute(tc,uc) 
+    routers.StartRoute(tc) 
 }
