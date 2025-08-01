@@ -11,18 +11,19 @@ type TaskRepoI interface {
     DeleteTask(id string)error
 }
 type UserRepoI interface{
-	RegisterUser(* Domain.User)error
-	// LoginUser(* Domain.User)error
-	//    Isadmin(* Domain.User)(bool,error)
+	Register(* Domain.User)error
+	UserExist(username string)(Domain.User,bool)
+	CountUsers()(int64, error)
+	Isadmin(username string)(bool,error)
 	// Promote(* Domain.User)error
 }
 type PasswordServiceI interface {
 	HashPassword(password string) (string, error)
-	// ComparePassword(password string, hashedpassword string) bool
+	ComparePassword(password string, hashedpassword string) (bool,error)
 }
 type JwtI interface{
-	GenerateToken( user *Domain.User, secret string)(string)
+	GenerateToken( user *Domain.User)(string,error)
 	VerifyToken(token string)(bool,error)
-    ExtractFromToken(token  string)(string, error)
+	ExtractFromToken(token  string)(string, error)
 }
 

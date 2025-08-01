@@ -17,3 +17,9 @@ func (ps *PasswordService) HashPassword (password string) (string,error){
 	}
 	return string(HashedPassword), nil
 }
+func (ps *PasswordService) ComparePassword(pass string, hashed string) (bool,error){
+    if err := bcrypt.CompareHashAndPassword([]byte(hashed), []byte(pass)); err != nil{
+		return false, errors.New("the password is not correct")
+	}
+	return true, nil
+}
