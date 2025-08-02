@@ -52,3 +52,23 @@ func (ur *UserRepo) Isadmin(username string)(bool, error){
 	}
 	return user.Isadmin, nil
 }
+func (ur *UserRepo) Promote(username string) error{
+    user, exists := ur.UserExist(username) 
+	if !exists {
+		return errors.New("the user does not exist")
+	}
+    if user.Isadmin {
+		return errors.New("user is already an admin")
+	}
+    update := bson.M{
+		"$set": bson.M{
+			"isadmin":   true,
+		},
+	}
+    result, err := ur.Collection.UpdateOne(ur.Context, bson.M{"username": username}, update)
+	if err != nil || result.MatchedCount == 0 {
+		return errors.New("could promote the user")
+	}
+	return nil
+}
+

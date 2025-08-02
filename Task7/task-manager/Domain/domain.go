@@ -21,3 +21,6 @@ type LoginRequest struct{
 	Username string `json:"username" bson:"username"`
 	Password string `json:"password" bson:"password"`
 }
+type PromotionRequest struct{
+	Username string `json:"username" bson:"username"`
+}

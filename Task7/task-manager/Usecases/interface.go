@@ -15,7 +15,7 @@ type UserRepoI interface{
 	UserExist(username string)(Domain.User,bool)
 	CountUsers()(int64, error)
 	Isadmin(username string)(bool,error)
-	// Promote(* Domain.User)error
+	Promote(username string)error
 }
 type PasswordServiceI interface {
 	HashPassword(password string) (string, error)
@@ -26,4 +26,3 @@ type JwtI interface{
 	VerifyToken(token string)(bool,error)
 	ExtractFromToken(token  string)(string, error)
 }
-

@@ -57,3 +57,6 @@ func (uu *UserUsecase) Login (lr *Domain.LoginRequest) (string,error){
     return token,err
 }
 
+func (uu *UserUsecase) Promote (username string) error{
+	return uu.Repo.Promote(username)
+}

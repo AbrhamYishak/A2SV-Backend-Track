@@ -8,10 +8,10 @@ import (
 	"fmt"
 )
 type Collection struct{
-	task *mongo.Collection
-	user *mongo.Collection
+	Task *mongo.Collection
+	User *mongo.Collection
 }
-func initDB() * Collection{
+func InitDB() * Collection{
 	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -28,7 +28,7 @@ func initDB() * Collection{
     taskCollection := client.Database("taskdb").Collection("tasks")
     userCollection := client.Database("taskdb").Collection("users")
     return &Collection{
-		task:  taskCollection,
-		user:  userCollection,
+		Task:  taskCollection,
+		User:  userCollection,
 	}
 }

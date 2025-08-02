@@ -4,14 +4,14 @@ import (
 	"net/http"
 	"task7/Domain"
 	"task7/Usecases"
-
+    "task7/Infrastructure"
 	"github.com/gin-gonic/gin"
 )
 type Controller struct {
 	TaskUseCase *Usecases.TaskUsecase
 	UserUseCase *Usecases.UserUsecase
 }
-func NewTaskController(tuc *Usecases.TaskUsecase,uuc *Usecases.UserUsecase) *Controller {
+func NewController(tuc *Usecases.TaskUsecase,uuc *Usecases.UserUsecase) *Controller {
 	return &Controller{
 		TaskUseCase: tuc,
 		UserUseCase: uuc,
@@ -94,4 +94,23 @@ func(con *Controller) Login (c *gin.Context){
 		return
 	}
 	c.IndentedJSON(http.StatusOK, gin.H{"token":token,"message":"Succesfully logged in"})
+}
+func (con *Controller) Promote (c *gin.Context){
+    var request Domain.PromotionRequest	
+	if err := c.BindJSON(&request); err!=nil{
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"message":"invalid input"})
+		return
+	}
+	err := con.UserUseCase.Promote(request.Username)
+	if err !=nil{
+		c.IndentedJSON(http.StatusInternalServerError, gin.H{"message":err.Error()})
+		return
+	}
+	c.IndentedJSON(http.StatusOK, gin.H{"message":"Succesfully Promoted User"})
+}
+func (con *Controller) AuthUserMiddleware() gin.HandlerFunc{
+    return Infrastructure.JwtAuthMiddlewareUser(*con.UserUseCase)
+}
+func (con *Controller) AuthAdminMiddleware() gin.HandlerFunc{
+    return Infrastructure.JwtAuthMiddlewareAdmin(*con.UserUseCase)
 }
